@@ -6,6 +6,9 @@ class AdFormat(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True, auto_now=True)
 
+    def __unicode__(self):
+        return '%s - %s' % (self.ad_format_name, self.size)
+
     class Meta:
         db_table = u'ad_formats'
 
@@ -91,6 +94,9 @@ class Network(models.Model):
     updated_at = models.DateTimeField(auto_now_add=True, auto_now=True)
     reporting_url = models.CharField(max_length=255, null=True, blank=True)
 
+    def __unicode__(self):
+        return self.network_name
+
     class Meta:
         db_table = u'networks'
 
@@ -116,6 +122,9 @@ class Publisher(models.Model):
     site_description = models.TextField(blank=True, null = True)
 #    site_keywords = models.CharField(max_length=255, blank=True)
 #    accepted_tac = models.DateTimeField(null=True, blank=True)
+#
+    def __unicode__(self):
+        return self.site_name
 
     class Meta:
         db_table = u'publishers'
@@ -151,6 +160,10 @@ class Tag(models.Model):
     floor = models.DecimalField(null=True, max_digits=5, decimal_places=2, blank=True)
     max_daily_impressions = models.IntegerField(null=True, blank=True)
     pacing = models.FloatField(null=True, blank=True)
+
+    def __unicode__(self):
+        return self.tag_name
+
     class Meta:
         db_table = u'tags'
 
@@ -159,6 +172,7 @@ class TagOption(models.Model):
     tag = models.ForeignKey(Tag)
     option_name = models.CharField(unique=True, max_length=255, blank=True)
     option_value = models.CharField(max_length=255, blank=True)
+
     class Meta:
         db_table = u'tag_options'
 
@@ -166,5 +180,6 @@ class TagTarget(models.Model):
     tag = models.ForeignKey(Tag)
     key_name = models.CharField(max_length=255, blank=True)
     key_value = models.CharField(max_length=255, blank=True)
+
     class Meta:
         db_table = u'tag_targets'
