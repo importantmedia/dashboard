@@ -142,6 +142,12 @@ class Publisher(models.Model):
 
 
 class Tag(models.Model):
+    SIZE_CHOICES = (
+        ('300x250', '300x250 MR'),
+        ('728x90', '728x90 LB'),
+        ('160x600', '160x600 WS'),
+    )
+
     tag_name = models.CharField(max_length=255, blank=True)
     network = models.ForeignKey(Network)
     publisher = models.ForeignKey(Publisher)
@@ -152,7 +158,7 @@ class Tag(models.Model):
     tier = models.IntegerField(null=True, blank=True)
     frequency_cap = models.IntegerField(null=True, blank=True)
     rejection_time = models.IntegerField(null=True, blank=True)
-    size = models.CharField(max_length=255, blank=True)
+    size = models.CharField(max_length=255, choices = SIZE_CHOICES)
     tag = models.TextField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True, auto_now=True)
