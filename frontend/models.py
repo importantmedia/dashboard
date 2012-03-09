@@ -147,6 +147,18 @@ class Tag(models.Model):
         ('728x90', '728x90 LB'),
         ('160x600', '160x600 WS'),
     )
+    TIER_CHOICES = (
+        (1, '1'),
+        (2, '2'),
+        (3, '3'),
+        (4, '4'),
+        (5, '5'),
+        (6, '6'),
+        (7, '7'),
+        (8, '8'),
+        (9, '9'),
+        (10, '10')
+    )
 
     tag_name = models.CharField(max_length=255, blank=True)
     network = models.ForeignKey(Network)
@@ -155,7 +167,7 @@ class Tag(models.Model):
     enabled = models.BooleanField(default = True)
     always_fill = models.BooleanField(default = False)
     sample_rate = models.DecimalField(null=True, max_digits=7, decimal_places=2, blank=True)
-    tier = models.IntegerField(null=True, blank=True)
+    tier = models.IntegerField(null=True, choices = TIER_CHOICES)
     frequency_cap = models.IntegerField(null=True, blank=True)
     rejection_time = models.IntegerField(null=True, blank=True)
     size = models.CharField(max_length=255, choices = SIZE_CHOICES)

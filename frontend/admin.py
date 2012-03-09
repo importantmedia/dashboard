@@ -22,5 +22,6 @@ class TagAdmin(admin.ModelAdmin):
     search_fields = ["name", "publisher__name", "network__name", "code"]
     list_filter = ["publisher", "network", "size", "enabled", "always_fill"]
     ordering = ["publisher", '-tier', 'value']
+    list_editable = ['tier', 'value', "floor", "rejection_time"]
     list_display = ['tag_name', 'publisher', 'network', 'size', 'tier', 'value', "enabled", "always_fill", "floor", "frequency_cap", "rejection_time", "sample_rate", "pacing", "max_daily_impressions"]
 admin.site.register(Tag, TagAdmin)
