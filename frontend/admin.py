@@ -1,15 +1,16 @@
 from django.contrib import admin
-from frontend.models import AdFormat, Network, Publisher, Tag, TagOption, TagTarget
+from frontend.models import AdFormat, Network, Publisher, Tag
 
-#class AdFormatAdmin(admin.ModelAdmin):
-    #ordering = ["id"]
-    #list_display = ['ad_format_name', 'size']
-#admin.site.register(AdFormat, AdFormatAdmin)
+class AdFormatAdmin(admin.ModelAdmin):
+    ordering = ["id"]
+    list_display = ['ad_format_name', 'size']
+admin.site.register(AdFormat, AdFormatAdmin)
 
 class NetworkAdmin(admin.ModelAdmin):
     search_fields = ["network_name"]
     ordering = ["network_name"]
-    list_display = ['network_name', 'pay_type', 'enabled']
+    list_display = ['network_name', 'pay_type', 'enabled', 'us_only']
+    list_editable = ['pay_type', 'enabled', 'us_only']
 admin.site.register(Network, NetworkAdmin)
 
 class PublisherAdmin(admin.ModelAdmin):

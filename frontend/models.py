@@ -161,23 +161,24 @@ class Tag(models.Model):
     )
 
     tag_name = models.CharField(max_length=255, blank=True)
-    network = models.ForeignKey(Network)
     publisher = models.ForeignKey(Publisher)
-    value = models.DecimalField(null=True, max_digits=5, decimal_places=2, blank=True, help_text="Estimated CPM for this tag. Tags are sorted by Tier, then value descending.")
-    enabled = models.BooleanField(default = True)
-    always_fill = models.BooleanField(default = False, help_text="Will this tag fill 100% of the time?")
-    sample_rate = models.DecimalField(null=True, max_digits=5, decimal_places=2, blank=True, help_text="Issue this tag x% of the time, disregarding all other targeting criteria")
+    network = models.ForeignKey(Network)
+    size = models.CharField(max_length=255, choices = SIZE_CHOICES)
     tier = models.IntegerField(null=True, choices = TIER_CHOICES, help_text="1 being the highest. Tags are sorted by Tier, then value descending.")
+    value = models.DecimalField(null=True, max_digits=5, decimal_places=2, blank=True, help_text="Estimated CPM for this tag. Tags are sorted by Tier, then value descending.")
+    floor = models.DecimalField(null=True, max_digits=5, decimal_places=2, blank=True, help_text="Some networks support an absolute minimum that they will pay. Used to prevent client side logic from adjusting the 'value' below this point.")
+    always_fill = models.BooleanField(default = False, help_text="Will this tag fill 100% of the time?")
+    tag = models.TextField(blank=True, help_text="html snippet for tag, supplied by the network", verbose_name="Code")
+
     frequency_cap = models.IntegerField(null=True, blank=True, help_text="Max # times within 24 hours to display this tag for a user. Resets on the users' clock")
     rejection_time = models.IntegerField(null=True, blank=True, help_text="After a default is issued, wait this many minutes before trying again. Recommend that every network that defaults have this set")
-    size = models.CharField(max_length=255, choices = SIZE_CHOICES)
-    tag = models.TextField(blank=True, help_text="html snippet for tag, supplied by the network", verbose_name="Code")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True, auto_now=True)
 #    auto_update_ecpm = models.BooleanField(default = False)
-    floor = models.DecimalField(null=True, max_digits=5, decimal_places=2, blank=True, help_text="Some networks support an absolute minimum that they will pay. Used to prevent client side logic from adjusting the 'value' below this point.")
+    enabled = models.BooleanField(default = True)
     max_daily_impressions = models.IntegerField(null=True, blank=True)
-    pacing = models.FloatField(null=True, blank=True, help_text="Like 'sample rate', issue this tag x% of the time, *respecting* all of its criteria")
+    sample_rate = models.DecimalField(null=True, max_digits=5, decimal_places=2, blank=True, help_text="Issue this tag x% of the time, disregarding all other targeting criteria. Leave blank for 100%")
+    pacing = models.FloatField(null=True, blank=True, help_text="Like 'sample rate', issue this tag x% of the time, *respecting* all of its criteria. Leave blank for 100%")
 
     def __unicode__(self):
         return self.tag_name
