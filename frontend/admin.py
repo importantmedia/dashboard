@@ -17,7 +17,7 @@ admin.site.register(Network, NetworkAdmin)
 class PublisherAdmin(admin.ModelAdmin):
     search_fields = ["site_name"]
     ordering = ["site_name"]
-    list_display = ['site_name', 'site_url']
+    list_display = ['site_name', 'id', 'site_url']
 admin.site.register(Publisher, PublisherAdmin)
 
 class TagAdmin(admin.ModelAdmin):
