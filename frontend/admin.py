@@ -1,10 +1,10 @@
 from django.contrib import admin
-from frontend.models import AdFormat, Network, Publisher, Tag
+from frontend.models import Network, Publisher, Tag
 
-class AdFormatAdmin(admin.ModelAdmin):
-    ordering = ["id"]
-    list_display = ['ad_format_name', 'size']
-admin.site.register(AdFormat, AdFormatAdmin)
+#class AdFormatAdmin(admin.ModelAdmin):
+#    ordering = ["id"]
+#    list_display = ['ad_format_name', 'size']
+#admin.site.register(AdFormat, AdFormatAdmin)
 
 class NetworkAdmin(admin.ModelAdmin):
     search_fields = ["network_name"]
