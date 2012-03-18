@@ -1,4 +1,4 @@
-# Django settings for liftium project.
+# Django settings for dashboard project.
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -100,7 +100,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
 )
 
-ROOT_URLCONF = 'liftium.urls'
+ROOT_URLCONF = 'dashboard.urls'
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
@@ -118,7 +118,8 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
-    'frontend'
+    'frontend',
+    'south'
 )
 
 # A sample logging configuration. The only tangible logging
