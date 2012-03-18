@@ -1,9 +1,10 @@
 from django.contrib import admin
 from django.contrib.sites.models import Site
-from frontend.models import Network, Publisher, Tag
+from frontend.models import Network, Publisher, Tag, TagTarget
 
 # Get rid of the default django "site" admin, it's confusing
 admin.site.unregister(Site)
+
 
 class NetworkAdmin(admin.ModelAdmin):
     search_fields = ["network_name"]
@@ -13,11 +14,17 @@ class NetworkAdmin(admin.ModelAdmin):
     list_editable = ['pay_type', 'enabled', 'us_only']
 admin.site.register(Network, NetworkAdmin)
 
+
 class PublisherAdmin(admin.ModelAdmin):
     search_fields = ["site_name"]
     ordering = ["site_name"]
     list_display = ['site_name', 'id', 'site_url']
 admin.site.register(Publisher, PublisherAdmin)
+
+
+class TagTargetInline(admin.TabularInline):
+    model = TagTarget
+    extra = 1
 
 class TagAdmin(admin.ModelAdmin):
 
@@ -52,11 +59,11 @@ class TagAdmin(admin.ModelAdmin):
     clickable_network.allow_tags = True
     clickable_network.short_description = "Network"
 
-    search_fields = ["tag_name", "publisher__site_name", "network__network_name", "tag"]
+
+    inlines = [TagTargetInline]
     list_filter = ["publisher", "network", "size", "enabled", "always_fill"]
-    ordering = ["publisher", '-tier', 'value']
     list_editable = ['tier', 'value']
     list_display = ['tag_info', 'clickable_publisher', 'clickable_network', 'tier', 'value', "enabled", "always_fill", "floor", "delivery"]
+    ordering = ["publisher", 'tier', '-value']
+    search_fields = ["tag_name", "publisher__site_name", "network__network_name", "tag"]
 admin.site.register(Tag, TagAdmin)
-
-

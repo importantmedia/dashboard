@@ -196,8 +196,14 @@ class TagOption(models.Model):
         db_table = u'tag_options'
 
 class TagTarget(models.Model):
+
+    NAME_CHOICES = (
+        ('browser', 'Browser (ex. MSIE)'),
+        ('country', 'Country (geo targeting. ex. us)'),
+        ('domain', 'Domain (site targeting)'),
+    )
     tag = models.ForeignKey(Tag)
-    key_name = models.CharField(max_length=255, blank=True)
+    key_name = models.CharField(max_length=255, blank=True, choices = NAME_CHOICES)
     key_value = models.CharField(max_length=255, blank=True)
 
     class Meta:
