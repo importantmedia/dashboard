@@ -1,10 +1,9 @@
 from django.contrib import admin
+from django.contrib.sites.models import Site
 from frontend.models import Network, Publisher, Tag
 
-#class AdFormatAdmin(admin.ModelAdmin):
-#    ordering = ["id"]
-#    list_display = ['ad_format_name', 'size']
-#admin.site.register(AdFormat, AdFormatAdmin)
+# Get rid of the default django "site" admin, it's confusing
+admin.site.unregister(Site)
 
 class NetworkAdmin(admin.ModelAdmin):
     search_fields = ["network_name"]
@@ -59,3 +58,5 @@ class TagAdmin(admin.ModelAdmin):
     list_editable = ['tier', 'value']
     list_display = ['tag_info', 'clickable_publisher', 'clickable_network', 'tier', 'value', "enabled", "always_fill", "floor", "delivery"]
 admin.site.register(Tag, TagAdmin)
+
+
