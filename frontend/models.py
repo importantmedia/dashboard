@@ -100,7 +100,7 @@ class Network(models.Model):
     comments = models.TextField(null=True, blank=True)
     contact_info = models.TextField(null=True, blank=True)
     billing_info = models.TextField(null=True, blank=True)
-    brand_safety_level = models.IntegerField(null=True, blank=True, choices = ONE_TO_TEN, default = 5)
+    brand_safety_level = models.IntegerField(null=True, blank=True, choices = ONE_TO_TEN, default = 5, help_text="How brand-safe is this ad network? Must be higher than the brand safety level for the publisher for the tag to show")
  #   tag_template = models.TextField(blank=True)
  #   scraping_instructions = models.TextField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -124,7 +124,7 @@ class NetworkTagOption(models.Model):
 class Publisher(models.Model):
     site_name = models.CharField(unique=True, max_length=255)
     site_url = models.CharField(max_length=255, null=True, blank=True)
-    brand_safety_level = models.IntegerField(null=True, blank=True, choices = ONE_TO_TEN, default = 1)
+    brand_safety_level = models.IntegerField(null=True, blank=True, choices = ONE_TO_TEN, default = 1, help_text="How picky is this publisher about ad quality? Must be lower than the brand safety level for the network for the tag to show")
     hoptime = models.IntegerField(null=True, blank=True, default = 1500, help_text="How long in milliseconds, to try the chain. Once it's passed, jump to the always fill")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True, auto_now=True)
