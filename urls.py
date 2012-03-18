@@ -10,5 +10,6 @@ urlpatterns = patterns('',
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
-    url(r'dashboard/', include(admin.site.urls)),
+    url(r'dashboard/', include(admin.site.urls)), # for the dev server
+    url(r'^$', include(admin.site.urls)), # for apache
 )
