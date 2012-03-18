@@ -1,5 +1,18 @@
 from django.db import models
 
+ONE_TO_TEN = (
+    (1, '1'),
+    (2, '2'),
+    (3, '3'),
+    (4, '4'),
+    (5, '5'),
+    (6, '6'),
+    (7, '7'),
+    (8, '8'),
+    (9, '9'),
+    (10, '10')
+)
+
 class AdFormat(models.Model):
     ad_format_name = models.CharField(max_length=50, blank=True)
     size = models.CharField(max_length=50, blank=True)
@@ -87,7 +100,7 @@ class Network(models.Model):
     comments = models.TextField(null=True, blank=True)
     contact_info = models.TextField(null=True, blank=True)
     billing_info = models.TextField(null=True, blank=True)
-    brand_safety_level = models.IntegerField(null=True, blank=True)
+    brand_safety_level = models.IntegerField(null=True, blank=True, choices = ONE_TO_TEN, default = 5)
  #   tag_template = models.TextField(blank=True)
  #   scraping_instructions = models.TextField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -111,7 +124,7 @@ class NetworkTagOption(models.Model):
 class Publisher(models.Model):
     site_name = models.CharField(unique=True, max_length=255)
     site_url = models.CharField(max_length=255, null=True, blank=True)
-    brand_safety_level = models.IntegerField(null=True, blank=True)
+    brand_safety_level = models.IntegerField(null=True, blank=True, choices = ONE_TO_TEN, default = 1)
     hoptime = models.IntegerField(null=True, blank=True, default = 1500, help_text="How long in milliseconds, to try the chain. Once it's passed, jump to the always fill")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True, auto_now=True)
@@ -147,24 +160,12 @@ class Tag(models.Model):
         ('728x90', '728x90 LB'),
         ('160x600', '160x600 WS'),
     )
-    TIER_CHOICES = (
-        (1, '1'),
-        (2, '2'),
-        (3, '3'),
-        (4, '4'),
-        (5, '5'),
-        (6, '6'),
-        (7, '7'),
-        (8, '8'),
-        (9, '9'),
-        (10, '10')
-    )
 
     tag_name = models.CharField(max_length=255, blank=True)
     publisher = models.ForeignKey(Publisher)
     network = models.ForeignKey(Network)
     size = models.CharField(max_length=255, choices = SIZE_CHOICES)
-    tier = models.IntegerField(null=True, choices = TIER_CHOICES, help_text="1 being the highest. Tags are sorted by Tier, then value descending.")
+    tier = models.IntegerField(null=True, choices = ONE_TO_TEN, help_text="1 being the highest. Tags are sorted by Tier, then value descending.")
     value = models.DecimalField(null=True, max_digits=5, decimal_places=2, blank=True, help_text="Estimated CPM for this tag. Tags are sorted by Tier, then value descending.")
     floor = models.DecimalField(null=True, max_digits=5, decimal_places=2, blank=True, help_text="Some networks support an absolute minimum that they will pay. Used to prevent client side logic from adjusting the 'value' below this point.")
     tag = models.TextField(blank=True, help_text="HTML tag supplied by the network", verbose_name="Code")
