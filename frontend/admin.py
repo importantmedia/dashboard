@@ -16,9 +16,10 @@ admin.site.register(Network, NetworkAdmin)
 
 
 class PublisherAdmin(admin.ModelAdmin):
-    search_fields = ["site_name"]
-    ordering = ["site_name"]
+    exclude = ["brand_safety_level"]
     list_display = ['site_name', 'id', 'site_url']
+    ordering = ["site_name"]
+    search_fields = ["site_name"]
 admin.site.register(Publisher, PublisherAdmin)
 
 

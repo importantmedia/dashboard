@@ -111,7 +111,7 @@ class NetworkTagOption(models.Model):
 class Publisher(models.Model):
     site_name = models.CharField(unique=True, max_length=255)
     site_url = models.CharField(max_length=255, null=True, blank=True)
- #   brand_safety_level = models.IntegerField(null=True, blank=True)
+    brand_safety_level = models.IntegerField(null=True, blank=True)
     hoptime = models.IntegerField(null=True, blank=True, default = 1500, help_text="How long in milliseconds, to try the chain. Once it's passed, jump to the always fill")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True, auto_now=True)
