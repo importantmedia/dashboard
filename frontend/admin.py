@@ -9,9 +9,9 @@ admin.site.unregister(Site)
 class NetworkAdmin(admin.ModelAdmin):
     search_fields = ["network_name"]
     ordering = ["network_name"]
-    exclude = ["supports_threshold", "us_only"]
-    list_display = ['network_name', 'pay_type', 'enabled', 'us_only']
-    list_editable = ['pay_type', 'enabled', 'us_only']
+    exclude = ["supports_threshold", "us_only", "brand_safety_level"]
+    list_display = ['network_name', 'pay_type', 'enabled']
+    list_editable = ['pay_type', 'enabled']
 admin.site.register(Network, NetworkAdmin)
 
 

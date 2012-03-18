@@ -87,7 +87,7 @@ class Network(models.Model):
     comments = models.TextField(null=True, blank=True)
     contact_info = models.TextField(null=True, blank=True)
     billing_info = models.TextField(null=True, blank=True)
-#   brand_safety_level = models.IntegerField(null=True, blank=True)
+    brand_safety_level = models.IntegerField(null=True, blank=True)
  #   tag_template = models.TextField(blank=True)
  #   scraping_instructions = models.TextField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
