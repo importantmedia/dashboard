@@ -46,6 +46,9 @@ class TagAdmin(admin.ModelAdmin):
             out += "Sample Rate: %s%%<br />" % tag.sample_rate
         if tag.pacing:
             out += "Pacing Rate: %s%%<br />" % tag.pacing
+
+        for targeting_criteria in tag.tagtarget_set.get_query_set().all():
+            out += "%s: %s<br />" % (targeting_criteria.display_name(), targeting_criteria.key_value)
         return out
     delivery.allow_tags = True
 

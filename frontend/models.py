@@ -206,5 +206,8 @@ class TagTarget(models.Model):
     key_name = models.CharField(max_length=255, blank=True, choices = NAME_CHOICES)
     key_value = models.CharField(max_length=255, blank=True)
 
+    def display_name(self):
+        return self.key_name.title()
+
     class Meta:
         db_table = u'tag_targets'
