@@ -1,0 +1,6 @@
+#result_list td input[type=text]{
+    width: 50px;
+}
+#result_list td select{
+    width: 50px;
+}

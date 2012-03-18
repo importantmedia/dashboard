@@ -58,15 +58,28 @@ class TagAdmin(admin.ModelAdmin):
     clickable_publisher.short_description = "Publisher"
 
     def clickable_network(self, tag):
-        return '<a href="../network/%s">%s</a>' % (tag.network.id, tag.network.network_name)
+        out = '<a href="../network/%s">%s</a>' % (tag.network.id, tag.network.network_name)
+        if tag.always_fill:
+            out += "<br />Always fill"
+        return out
     clickable_network.allow_tags = True
     clickable_network.short_description = "Network"
 
+    def fillrate_stats(self, tag):
+        return "coming soon"
+    fillrate_stats.allow_tags = True
+    fillrate_stats.short_description = "Fill Rate Stats"
+
+    class Media:
+        css = {
+            'all': ('customize_tag_admin.css',)
+        }
+        js = ("customize_tag_admin.js",)
 
     inlines = [TagTargetInline]
-    list_filter = ["publisher", "network", "size", "enabled", "always_fill"]
+    list_filter = ["publisher", "network", "size", "enabled"]
     list_editable = ['tier', 'value']
-    list_display = ['tag_info', 'clickable_publisher', 'clickable_network', 'tier', 'value', "enabled", "always_fill", "floor", "delivery"]
+    list_display = ['tag_info', 'clickable_publisher', 'clickable_network', 'tier', 'value', "enabled", "floor", "delivery", 'fillrate_stats']
     ordering = ["publisher", 'tier', '-value']
     search_fields = ["tag_name", "publisher__site_name", "network__network_name", "tag"]
 admin.site.register(Tag, TagAdmin)
