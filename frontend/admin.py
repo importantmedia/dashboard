@@ -9,13 +9,14 @@ admin.site.unregister(Site)
 class NetworkAdmin(admin.ModelAdmin):
     search_fields = ["network_name"]
     ordering = ["network_name"]
-    exclude = ["supports_threshold", "us_only"]
+    exclude = ["supports_threshold", "us_only", "tag_template"]
     list_display = ['network_name', 'pay_type', 'enabled', 'brand_safety_level']
     list_editable = ['pay_type', 'enabled']
 admin.site.register(Network, NetworkAdmin)
 
 
 class PublisherAdmin(admin.ModelAdmin):
+    exclude = ["beacon_throttle"]
     list_display = ['site_name', 'id', 'brand_safety_level', 'site_url']
     ordering = ["site_name"]
     search_fields = ["site_name"]
