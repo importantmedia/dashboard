@@ -1,0 +1,65 @@
+{% extends 'base.html'%}
+
+{% block content %}
+<script src="/dashboard/static/js/TagGenerator.js"></script>
+<style type="text/css">
+.formField {
+    clear:left;
+}
+.formLabel {
+    float: left;
+    display: block;
+    width: 150px;
+    font-weight: bold;
+}
+.formFieldInput {
+    float: left;
+}
+</style>
+<form id="generator_form">
+
+    <div class="formField">
+        <div class="formLabel">Publisher:</div>
+        <div class="formFieldInput">
+            <select id="pubid">
+              <option value="">Select a publisher</option>
+            {% for publisher in publishers %}
+              <option value="{{publisher.id}}">{{publisher.site_name}}</option>
+            {% endfor %}
+            </select>
+        </div>
+    </div>
+
+    <div class="formField">
+        <div class="formLabel">Size:</div>
+        <div class="formFieldInput">
+            <select id="size">
+              <option value="">Select a size</option>
+            {% for value, display in sizes.items %}
+              <option value="{{value}}">{{display}}</option>
+            {% endfor %}
+            </select>
+        </div>
+    </div>
+
+    <div class="formField">
+        <div class="formLabel">Delivery Type:</div>
+        <div class="formFieldInput">
+            <select id="delivery_type">
+              <option value="adserver">Through Ad Server
+              <option value="iframe">Iframe
+              <option value="onpage">Tag On Page
+            </select>
+        </div>
+    </div>
+
+
+    <div class="formField">
+        <div class="formLabel" style="float:none">Tag:</div>
+        <textarea id="tag" style="width:550px;height:150px;font-size:smaller"></textarea>
+    </div>
+</form>
+<script>
+$("#generator_form").find("input, select").change(TagGenerator.generateTag);
+</script>
+{% endblock content%}
