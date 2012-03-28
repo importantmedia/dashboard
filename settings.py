@@ -65,11 +65,6 @@ STATIC_ROOT = ROOT_PATH + '/collected_static/'
 # Example: "http://media.lawrence.com/static/"
 STATIC_URL = '/dashboard/static/'
 
-# URL prefix for admin static files -- CSS, JavaScript and images.
-# Make sure to use a trailing slash.
-# Examples: "http://foo.com/static/admin/", "/static/admin/".
-ADMIN_MEDIA_PREFIX = '/dashboard/static/admin/'
-
 # Additional locations of static files
 STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
