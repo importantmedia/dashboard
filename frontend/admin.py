@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.contrib.sites.models import Site
 from frontend.models import Network, Publisher, Tag, TagTarget
+from util import filldata_by_tag
 
 # Get rid of the default django "site" admin, it's confusing
 admin.site.unregister(Site)
@@ -67,7 +68,8 @@ class TagAdmin(admin.ModelAdmin):
     clickable_network.short_description = "Network"
 
     def fillrate_stats(self, tag):
-        return "coming soon"
+        stats = filldata_by_tag(tag.id)
+        return "%s of %s filled, %s%%" % (stats['loads'], stats['attempts'], round(stats['fill_rate'], 3) * 100)
     fillrate_stats.allow_tags = True
     fillrate_stats.short_description = "Fill Rate Stats"
 
