@@ -16,7 +16,7 @@ TagGenerator.generateTag = function() {
 		return false;
 	}
     var comments = true;
-    var placement = null;
+    var placement = $("#placement").val();
 
 	if ($("#delivery_type").val() == "iframe"){
 		var t = TagGenerator.generateIframeTag(pubid, size, comments, placement);
@@ -34,8 +34,11 @@ TagGenerator.generateTag = function() {
   }
 };
 
-TagGenerator.generateIframeTag = function(pubid, size, comments){
+TagGenerator.generateIframeTag = function(pubid, size, comments, placement){
 	var url = TagGenerator.deliveryHost + "tag_iframe?pubid=" + pubid + '&size=' + size;
+    if (placement) {
+        url += "placement=" + escape(placement);
+    }
 	var t = '';
 	if (comments){ t += '<!-- Begin Tag -->\n'; }
 
@@ -52,7 +55,7 @@ TagGenerator.generateIframeTag = function(pubid, size, comments){
 	return t;
 };
 
-TagGenerator.generateScriptTag = function(pubid, size, comments){
+TagGenerator.generateScriptTag = function(pubid, size, comments, placement){
         var t = '';
         if (comments){
                 t += '<!-- Begin Liftium set up. \n' +
@@ -68,8 +71,12 @@ TagGenerator.generateScriptTag = function(pubid, size, comments){
         return t;
 };
 
-TagGenerator.generateAdServerTag = function(pubid, size, comments){
-        var t = '<script src="' + TagGenerator.deliveryHost + 'callAd?pubid=' + pubid + '&slot=' + size + '"><\/script>';
+TagGenerator.generateAdServerTag = function(pubid, size, comments, placement){
+        var url =  TagGenerator.deliveryHost + 'callAd?pubid=' + pubid + '&slot=' + size;
+        if (placement) {
+            url += "&placement=" + escape(placement);
+        }
+        var t = '<script src="' + url + '"><\/script>';
         return t;
 };
 

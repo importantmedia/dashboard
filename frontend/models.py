@@ -202,6 +202,7 @@ class TagTarget(models.Model):
         ('browser', 'Browser (ex. MSIE)'),
         ('country', 'Country (geo targeting. ex. us)'),
         ('domain', 'Domain (site targeting)'),
+        ('placement', 'Placement (atf/btf)'),
     )
     tag = models.ForeignKey(Tag)
     key_name = models.CharField(max_length=255, blank=True, choices = NAME_CHOICES)

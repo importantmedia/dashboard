@@ -56,6 +56,17 @@
         </div>
     </div>
 
+    <div class="formField">
+        <div class="formLabel">Placement:</div>
+        <div class="formFieldInput">
+            <select id="placement">
+              <option value="">Select a placement</option>
+            {% for placement in placements %}
+              <option>{{placement}}</option>
+            {% endfor %}
+            </select>
+        </div>
+    </div>
 
     <div class="formField">
         <div class="formLabel" style="float:none">Tag:</div>
