@@ -1,6 +1,6 @@
 var TagGenerator = {
 	dimRegexp : /^([0-9]{2,4})x([0-9]{2,4})/,
-	deliveryHost : "http://delivery.importantmedia.org/" // default
+	deliveryHost : "http://delivery.lifti.us/" // default
 };
 
 TagGenerator.generateTag = function() {
