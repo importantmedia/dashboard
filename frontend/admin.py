@@ -85,4 +85,5 @@ class TagAdmin(admin.ModelAdmin):
     list_display = ['tag_info', 'clickable_publisher', 'clickable_network', 'tier', 'value', "enabled", "floor", "delivery", 'fillrate_stats']
     ordering = ["publisher", 'tier', '-value']
     search_fields = ["tag_name", "publisher__site_name", "network__network_name", "tag"]
+    save_as = True
 admin.site.register(Tag, TagAdmin)
