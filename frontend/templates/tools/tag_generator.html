@@ -1,6 +1,9 @@
-{% extends 'base.html'%}
+{% extends "admin/base_site.html" %}
+
+{% block title %}Tag Generator{% endblock %}
 
 {% block content %}
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
 <script src="/dashboard/static/js/TagGenerator.js"></script>
 <style type="text/css">
 .formField {
@@ -60,6 +63,6 @@
     </div>
 </form>
 <script>
-$("#generator_form").find("input, select").change(TagGenerator.generateTag);
+jQuery("#generator_form").find("input, select").change(TagGenerator.generateTag);
 </script>
 {% endblock content%}
